@@ -1,22 +1,38 @@
-#Importing socket to be able to communicate with server
 import socket
+import sys
+import time
 
-s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+# Create a TCP/IP socket
+sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-#Defining the IP adress and port of the device
-server = '***REMOVED***'
+# Connect the socket to the port where the server is listening
+ip = "***REMOVED***"
 port = 4002
 
-request = "GET / HTTP/1.1\nHost: "+server+"\n\n"
-#Requesting a connection to the server
-s.connect((server, port))
-#Sending commands to recieve measurements in ohm
-s.send(request.encode())
-result = s.recv(4096)
+server_address = (ip, port)
+print("Connecting...")
+sock.connect(server_address)
+print("Connected to", ip, "with port", port)
 
-#print(result)
+try:
 
-#Requires the result to have content to be printed
-while(len(result) > 0):
-    print(result)
-    result = s.recv(4096)
+    # Send data
+    message = "#04" + str(chr(13))
+    print('Sending "%s"' % message)
+    sock.sendall(message.encode('utf-8'))
+
+    # Look for the response
+    amount_received = 0
+    amount_expected = len(message.encode('utf-8'))
+
+    while amount_received < amount_expected:
+        data = sock.recv(4096)
+        # Compensate for data delay
+        time.sleep(0.5)
+        amount_received += len(data)
+        print('Recieved "%s"' % data)
+
+finally:
+    print('Closing Socket...')
+    sock.close()
+    print('Socket closed!')
