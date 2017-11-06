@@ -14,6 +14,10 @@ Foreløpig finnes det ingen informasjon for å komme i gang. Dette vil legges ut
 
 See also the list of [contributors](https://github.com/Tekbear99/MetInstitutt/contributors) who participated in this project.
 
+## Sources
+* [Socket programming in Python](https://pymotw.com/2/socket/tcp.html)
+* [PT100 to Celsius](https://techoverflow.net/2016/01/02/accurate-calculation-of-pt100pt1000-temperature-from-resistance/)
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
