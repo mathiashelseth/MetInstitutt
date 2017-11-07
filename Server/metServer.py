@@ -19,18 +19,24 @@ try:
     # Send data
     message = "#04" + str(chr(13))
     print('Sending "%s"' % message)
-    sock.sendall(message.encode('utf-8'))
+    sock.send(message.encode('utf-8'))
 
     # Look for the response
     amount_received = 0
-    amount_expected = len(message.encode('utf-8'))
+    amount_expected = 9
 
+    dChar = []
     while amount_received < amount_expected:
-        data = sock.recv(4096)
-        # Compensate for data delay
-        time.sleep(0.5)
+        data = sock.recv(1)
         amount_received += len(data)
-        print('Recieved "%s"' % data)
+        dataFull = str(data,'utf-8')
+
+        dVal = dataFull
+        dChar.append(dVal)
+
+    dataRes = dChar[2] + dChar[3] + dChar[4] + dChar[5] + dChar[6] + dChar[7]
+    print(dataRes)
+
 
 finally:
     print('Closing Socket...')
