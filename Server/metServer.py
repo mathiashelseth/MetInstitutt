@@ -29,7 +29,7 @@ def main(timer):
 
         # Send data
         message = "#04" + str(chr(13))
-        print('Sending "%s"' % message)
+        # print('Sending "%s"' % message)
         sock.send(message.encode('utf-8'))
 
         # Look for the response
