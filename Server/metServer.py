@@ -51,9 +51,9 @@ try:
     R = float(dataRes)
     t = ((((-R_0)*a) + math.sqrt((R_0 ** 2) * (a ** 2) - 4 * R_0 * b * (R_0 - R))) / (2 * R_0 * b))
     if(t == -0.0):
-        print("t = 0 C")
+        print(int(0))
     else:
-        print("t =",t,"C")
+        print(t)
 
 
 finally:
