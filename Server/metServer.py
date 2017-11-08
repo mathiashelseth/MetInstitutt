@@ -6,6 +6,12 @@ def space():
     print()
     print()
 
+#Constants#
+R_0 = 100
+a = 3.9083 * (10**(-3))
+b = -5.775 * (10**(-7))
+
+
 # Create a TCP/IP socket
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
