@@ -80,7 +80,6 @@ except ConnectionRefusedError:
     print()
     print('Connection failed')
     print('Could not connect to IP: ' + str(ip) + ' port: ' + str(port))
-    time.sleep(1)
     systemShutdown()
 
 #Calling the function Main after time: 5 seconds
