@@ -27,7 +27,7 @@ def main():
     sock.connect((ip, port))
     print("Connected to", ip, "with port", port)
 
-    measurements()
+    measurements(timer)
 
     finally:
         print('Closing Socket...')
