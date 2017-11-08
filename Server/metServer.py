@@ -19,14 +19,12 @@ sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 ip = "***REMOVED***"
 port = 4002
 
-print("Connecting...")
-sock.connect((ip, port))
-print("Connected to", ip, "with port", port)
-
-
 def space():
     print()
     print()
+
+def systemShutdown():
+    sys.exit()
 
 def main(timer):
     try:
@@ -68,6 +66,18 @@ def main(timer):
         sock.close()
         print('Socket closed!')
         main()
+#Making sure that the connection is made before sending data
+try:
+    print("Connecting...")
+    sock.connect((ip, port))
+    print("Connected to", ip, "with port", port)
+except ConnectionRefusedError:
+    print()
+    print()
+    print('Connection failed')
+    print('Could not connect to IP: ' + str(ip) + ' port: ' + str(port))
+    time.sleep(1)
+    systemShutdown()
 
 updateTimer.enter(5, 1, main, (updateTimer,))
 updateTimer.run()
