@@ -17,7 +17,8 @@ See also the list of [contributors](https://github.com/Tekbear99/MetInstitutt/co
 ## Sources
 * [Socket programming in Python](https://pymotw.com/2/socket/tcp.html)
 * [PT100 to Celsius](https://techoverflow.net/2016/01/02/accurate-calculation-of-pt100pt1000-temperature-from-resistance/)
-
+* [Picture with Ohm to Celsius values](http://www.intech.co.nz/products/temperature/typert/-200to239c.gif)
+* [Temperatures from Yr.no](https://www.yr.no/sted/Norge/Oslo/Oslo/Oslo_(Blindern)_m%C3%A5lestasjon/detaljert_statistikk.html)
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
