@@ -4,29 +4,31 @@ import time
 import math
 import sched
 
-updateTimer = sched.scheduler(time.time, time.sleep)
-
 #Constants#
 R_0 = 100
 a = 3.9083 * (10**(-3))
 b = -5.775 * (10**(-7))
+
+#Creating a function to time sending of code #04
+updateTimer = sched.scheduler(time.time, time.sleep)
+
+# Create a TCP/IP socket
+sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+# Connect the socket to the port where the server is listening
+ip = "***REMOVED***"
+port = 4002
+
+print("Connecting...")
+sock.connect((ip, port))
+print("Connected to", ip, "with port", port)
+
 
 def space():
     print()
     print()
 
 def main(timer):
-    # Create a TCP/IP socket
-    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-
-    # Connect the socket to the port where the server is listening
-    ip = "***REMOVED***"
-    port = 4002
-
-    print("Connecting...")
-    sock.connect((ip, port))
-    print("Connected to", ip, "with port", port)
-
     try:
 
         # Send data
