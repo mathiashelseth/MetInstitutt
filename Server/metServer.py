@@ -11,33 +11,24 @@ R_0 = 100
 a = 3.9083 * (10**(-3))
 b = -5.775 * (10**(-7))
 
-# Create a TCP/IP socket
-sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-
-# Connect the socket to the port where the server is listening
-ip = "37.26.220.85"
-port = 4002
-
 def space():
     print()
     print()
 
-def main():
+def main(timer):
+    # Create a TCP/IP socket
+    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+    # Connect the socket to the port where the server is listening
+    ip = "37.26.220.85"
+    port = 4002
+
+    print("Connecting...")
+    sock.connect((ip, port))
+    print("Connected to", ip, "with port", port)
+
     try:
-        print("Connecting...")
-        sock.connect((ip, port))
-        print("Connected to", ip, "with port", port)
 
-        measurements()
-
-    finally:
-        print('Closing Socket...')
-        sock.close()
-        print('Socket closed!')
-
-
-def measurements(timer):
-    try:
         # Send data
         message = "#04" + str(chr(13))
         print('Sending "%s"' % message)
@@ -67,10 +58,13 @@ def measurements(timer):
         else:
             currentTemp = ("%.2f" % t)
             print(currentTemp)
-        updateTimer.enter(5, 1, measurements, (timer,))
-    except:
-        main()
 
 
-updateTimer.enter(5, 1, measurements, (updateTimer,))
+    finally:
+        print('Closing Socket...')
+        sock.close()
+        print('Socket closed!')
+        updateTimer.enter(5, 1, main, (timer,))
+
+updateTimer.enter(5, 1, main, (updateTimer,))
 updateTimer.run()
