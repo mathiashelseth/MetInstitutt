@@ -23,7 +23,7 @@ def main():
     try:
         # Create a TCP/IP socket
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-
+ 
         print("Connecting...")
         sock.connect((ip, port))
         print("Connected to", ip, "with port", port)
