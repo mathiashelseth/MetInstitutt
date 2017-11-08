@@ -41,9 +41,8 @@ try:
     print(dataRes)
 
 
-    R = float(input("R = %s" + str(chr(13))) % dataRes)
+    R = float(input("R = %s" % dataRes + str(chr(13))))
     t = ((((-R_0)*a) + math.sqrt((R_0 ** 2) * (a ** 2) - 4 * R_0 * b * (R_0 - R))) / (2 * R_0 * b))
-    space()
     if(t == -0.0):
         print("t = 0 C")
     else:
