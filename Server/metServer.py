@@ -15,7 +15,7 @@ def space():
     print()
     print()
 
-def main(timer):
+def main():
     # Create a TCP/IP socket
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
@@ -27,8 +27,15 @@ def main(timer):
     sock.connect((ip, port))
     print("Connected to", ip, "with port", port)
 
-    try:
+    measurements()
 
+    finally:
+        print('Closing Socket...')
+        sock.close()
+        print('Socket closed!')
+
+def measurements(timer):
+    try:
         # Send data
         message = "#04" + str(chr(13))
         print('Sending "%s"' % message)
@@ -58,13 +65,8 @@ def main(timer):
         else:
             currentTemp = ("%.2f" % t)
             print(currentTemp)
+        updateTimer.enter(5, 1, measurements, (timer,))
 
 
-    finally:
-        print('Closing Socket...')
-        sock.close()
-        print('Socket closed!')
-        updateTimer.enter(5, 1, main, (timer,))
-
-updateTimer.enter(5, 1, main, (updateTimer,))
+updateTimer.enter(5, 1, measurements, (updateTimer,))
 updateTimer.run()
