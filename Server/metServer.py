@@ -63,6 +63,7 @@ def main(timer):
         updateTimer.enter(5, 1, main, (timer,))
 
     except:
+        print('There was an error during the sending and receiving of data')
         print('Closing Socket...')
         sock.close()
         print('Socket closed!')
