@@ -54,7 +54,6 @@ try:
         print(int(0.0))
     else:
         currentTemp = ("%.2f" % t)
-        print("Exact temp:", t)
         print(currentTemp)
 
 
