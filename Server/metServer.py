@@ -20,14 +20,15 @@ def space():
     print()
 
 def main():
-    # Create a TCP/IP socket
-    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    try:
+        # Create a TCP/IP socket
+        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-    print("Connecting...")
-    sock.connect((ip, port))
-    print("Connected to", ip, "with port", port)
+        print("Connecting...")
+        sock.connect((ip, port))
+        print("Connected to", ip, "with port", port)
 
-    measurements(timer)
+        measurements(timer)
 
     finally:
         print('Closing Socket...')
