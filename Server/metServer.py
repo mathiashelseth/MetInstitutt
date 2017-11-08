@@ -60,13 +60,13 @@ def main(timer):
         else:
             currentTemp = ("%.2f" % t)
             print(currentTemp)
+        updateTimer.enter(5, 1, main, (timer,))
 
-
-    finally:
+    except:
         print('Closing Socket...')
         sock.close()
         print('Socket closed!')
-        updateTimer.enter(5, 1, main, (timer,))
+        main()
 
 updateTimer.enter(5, 1, main, (updateTimer,))
 updateTimer.run()
