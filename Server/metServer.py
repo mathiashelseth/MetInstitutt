@@ -13,9 +13,8 @@ sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 ip = "37.26.220.85"
 port = 4002
 
-server_address = (ip, port)
 print("Connecting...")
-sock.connect(server_address)
+sock.connect((ip, port))
 print("Connected to", ip, "with port", port)
 
 try:
