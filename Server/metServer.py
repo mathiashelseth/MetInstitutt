@@ -11,6 +11,9 @@ R_0 = 100
 a = 3.9083 * (10**(-3))
 b = -5.775 * (10**(-7))
 
+# Create a TCP/IP socket
+sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
 # Connect the socket to the port where the server is listening
 ip = "***REMOVED***"
 port = 4002
@@ -21,19 +24,17 @@ def space():
 
 def main():
     try:
-        # Create a TCP/IP socket
-        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
- 
         print("Connecting...")
         sock.connect((ip, port))
         print("Connected to", ip, "with port", port)
 
-        measurements(timer)
+        measurements()
 
     finally:
         print('Closing Socket...')
         sock.close()
         print('Socket closed!')
+
 
 def measurements(timer):
     try:
@@ -67,6 +68,8 @@ def measurements(timer):
             currentTemp = ("%.2f" % t)
             print(currentTemp)
         updateTimer.enter(5, 1, measurements, (timer,))
+    except:
+        main()
 
 
 updateTimer.enter(5, 1, measurements, (updateTimer,))
