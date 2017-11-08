@@ -11,6 +11,10 @@ R_0 = 100
 a = 3.9083 * (10**(-3))
 b = -5.775 * (10**(-7))
 
+# Connect the socket to the port where the server is listening
+ip = "***REMOVED***"
+port = 4002
+
 def space():
     print()
     print()
@@ -18,10 +22,6 @@ def space():
 def main():
     # Create a TCP/IP socket
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-
-    # Connect the socket to the port where the server is listening
-    ip = "***REMOVED***"
-    port = 4002
 
     print("Connecting...")
     sock.connect((ip, port))
