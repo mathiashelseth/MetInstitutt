@@ -34,7 +34,7 @@ try:
         dVal = dataFull
         dChar.append(dVal)
 
-    dataRes = dChar[2] + dChar[3] + dChar[4] + dChar[5] + dChar[6] + dChar[7]
+    dataRes = float(dChar[2] + dChar[3] + dChar[4] + dChar[5] + dChar[6] + dChar[7])
     print(dataRes)
 
 
