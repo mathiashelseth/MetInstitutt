@@ -19,13 +19,11 @@ sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 ip = "***REMOVED***"
 port = 4002
 
-def space():
-    print()
-    print()
-
+#Function for shutting down system if ConnectionError
 def systemShutdown():
     sys.exit()
 
+#Main function for sending and receiving data
 def main(timer):
     try:
 
@@ -47,10 +45,11 @@ def main(timer):
             dVal = dataFull
             dChar.append(dVal)
 
+        #Collecting specific integers from reveived data
         dataRes = float(dChar[2] + dChar[3] + dChar[4] + dChar[5] + dChar[6] + dChar[7])
         print(dataRes)
 
-
+        #Formula for finding temperature using a measurement of ohm
         R = float(dataRes)
         t = ((((-R_0)*a) + math.sqrt((R_0 ** 2) * (a ** 2) - 4 * R_0 * b * (R_0 - R))) / (2 * R_0 * b))
         if(t == -0.0):
@@ -60,17 +59,22 @@ def main(timer):
             print(currentTemp)
         updateTimer.enter(5, 1, main, (timer,))
 
+    #In case of error while sending or receiving data, try closing socket an rebooting
     except:
         print('There was an error during the sending and receiving of data')
         print('Closing Socket...')
         sock.close()
         print('Socket closed!')
         main()
+
+
 #Making sure that the connection is made before sending data
 try:
     print("Connecting...")
     sock.connect((ip, port))
     print("Connected to", ip, "with port", port)
+
+#In case of Connection Error, shutdown program
 except ConnectionRefusedError:
     print()
     print()
@@ -79,5 +83,6 @@ except ConnectionRefusedError:
     time.sleep(1)
     systemShutdown()
 
+#Calling the function Main after time: 5 seconds
 updateTimer.enter(5, 1, main, (updateTimer,))
 updateTimer.run()
