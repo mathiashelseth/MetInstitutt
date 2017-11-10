@@ -4,6 +4,9 @@ import time
 import math
 import sched
 
+#Setting an array for holding all measurements for one minute
+minuteMeasurements = []
+
 #Constants#
 R_0 = 100
 a = 3.9083 * (10**(-3))
@@ -47,16 +50,37 @@ def main(timer):
 
         #Collecting specific integers from reveived data
         dataRes = float(dChar[2] + dChar[3] + dChar[4] + dChar[5] + dChar[6] + dChar[7])
-        print(dataRes)
 
         #Formula for finding temperature using a measurement of ohm
         R = float(dataRes)
         t = ((((-R_0)*a) + math.sqrt((R_0 ** 2) * (a ** 2) - 4 * R_0 * b * (R_0 - R))) / (2 * R_0 * b))
         if(t == -0.0):
-            print(int(0.0))
+
+            #Debugging given value for temperatur when provided ohm is 100.00
+            currentTemp = 0.0
         else:
             currentTemp = ("%.2f" % t)
-            print(currentTemp)
+
+        #Sending all measurements to array
+        minuteMeasurements.append(float(currentTemp))
+
+        #Checking if length of array is 12 or more
+        if(len(minuteMeasurements) >= 12):
+
+            #Finding temp average per minute
+            avrgMeasurement = sum(minuteMeasurements) / len(minuteMeasurements)
+
+            #Rounding off average temperature to two decimal
+            avrgTemp = float("%.2f" % avrgMeasurement)
+            print(avrgTemp)
+
+            #Clearing array for measurements for next minute
+            minuteMeasurements.clear()
+        else:
+
+            #If array is not longer than or equal to 12: ignore this is/else statement
+            pass
+
         updateTimer.enter(5, 1, main, (timer,))
 
     #In case of error while sending or receiving data, try closing socket an rebooting
@@ -68,11 +92,14 @@ def main(timer):
         main()
 
 
+#Start of program
+print("Connecting...")
+
 #Making sure that the connection is made before sending data
 try:
-    print("Connecting...")
     sock.connect((ip, port))
     print("Connected to", ip, "with port", port)
+    print("----------------------------------------")
 
 #In case of Connection Error, shutdown program
 except ConnectionRefusedError:
