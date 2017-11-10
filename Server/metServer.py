@@ -3,6 +3,9 @@ import sys
 import time
 import math
 import sched
+import datetime
+import os
+
 
 #Setting an array for holding all measurements for one minute
 minuteMeasurements = []
@@ -67,12 +70,15 @@ def main(timer):
         #Checking if length of array is 12 or more
         if(len(minuteMeasurements) >= 12):
 
+            #Adding timestamp to average temperature per minute|
+            timestamp = '{:%d.%m.%Y  %H:%M:%S}'.format(datetime.datetime.now())
+
             #Finding temp average per minute
             avrgMeasurement = sum(minuteMeasurements) / len(minuteMeasurements)
 
             #Rounding off average temperature to two decimal
             avrgTemp = float("%.2f" % avrgMeasurement)
-            print(avrgTemp)
+            print(timestamp + "   " + str(avrgTemp))
 
             #Clearing array for measurements for next minute
             minuteMeasurements.clear()
@@ -93,6 +99,7 @@ def main(timer):
 
 
 #Start of program
+os.system('cls')
 print("Connecting...")
 
 #Making sure that the connection is made before sending data
