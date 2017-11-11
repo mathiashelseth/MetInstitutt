@@ -29,6 +29,11 @@ port = 4002
 def systemShutdown():
     sys.exit()
 
+#Restarts the entire script if restarting main function fails
+def systemReboot():
+    python = sys.executable
+    os.execl(python, python, * sys.argv)
+
 #Main function for sending and receiving data
 def main(timer):
     try:
@@ -95,11 +100,13 @@ def main(timer):
         print('Closing Socket...')
         sock.close()
         print('Socket closed!')
-        main(timer)
+        try:
+            main(timer)
+        except:
+            systemReboot()
 
 
 #Start of program
-os.system('cls')
 print("Connecting...")
 
 #Making sure that the connection is made before sending data
