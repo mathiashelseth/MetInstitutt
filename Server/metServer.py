@@ -5,7 +5,7 @@ import math
 import sched
 import datetime
 import os
-
+import threading
 
 #Setting an array for holding all measurements for one minute
 minuteMeasurements = []
@@ -15,8 +15,12 @@ R_0 = 100
 a = 3.9083 * (10**(-3))
 b = -5.775 * (10**(-7))
 
-#Creating a function to time sending of code #04
-updateTimer = sched.scheduler(time.time, time.sleep)
+#----------------Previous time-function----------------#
+
+    #Creating a function to time sending of code #04
+    #updateTimer = sched.scheduler(time.time, time.sleep)
+
+#------------------------------------------------------#
 
 # Create a TCP/IP socket
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -35,7 +39,11 @@ def systemReboot():
     os.execl(python, python, * sys.argv)
 
 #Main function for sending and receiving data
-def main(timer):
+def main():
+
+    #Setting an alternative timer to run code every 5 seconds
+    threading.Timer(5.0, main).start()
+
     try:
 
         # Send data
@@ -67,6 +75,8 @@ def main(timer):
             #Debugging given value for temperatur when provided ohm is 100.00
             currentTemp = 0.0
         else:
+
+            #Rounding off to a two decimal number
             currentTemp = ("%.2f" % t)
 
         #Sending all measurements to array
@@ -92,28 +102,40 @@ def main(timer):
             #If array is not longer than or equal to 12: ignore this is/else statement
             pass
 
-        updateTimer.enter(5, 1, main, (timer,))
+        #updateTimer.enter(5, 1, main, (timer,))
+        time.sleep(5)
 
     #In case of error while sending or receiving data, try closing socket an rebooting
     except:
-        print('There was an error during the sending and receiving of data')
-        print('Closing Socket...')
+
+        #Closing the socket
         sock.close()
-        print('Socket closed!')
         try:
-            main(timer)
+
+            #Trying to restart the main function without shutting down
+            main()
         except:
+
+            #Rebooting program when program fails
             systemReboot()
 
 
-#Start of program
+
+#--------Start of program--------#
 print("Connecting...")
 
 #Making sure that the connection is made before sending data
 try:
+
+    #Connecting to the server via socket
     sock.connect((ip, port))
-    print("Connected to", ip, "with port", port)
-    print("----------------------------------------")
+
+    #Setting the time of connetion to the server if successful
+    connectionTime = '{:%H:%M:%S}'.format(datetime.datetime.now())
+
+    print("Connected to", ip, "with port", port, "@", connectionTime)
+    print("---------------------------------------------------")
+    main()
 
 #In case of Connection Error, shutdown program
 except ConnectionRefusedError:
@@ -121,8 +143,14 @@ except ConnectionRefusedError:
     print()
     print('Connection failed')
     print('Could not connect to IP: ' + str(ip) + ' port: ' + str(port))
+
+    #Shutting down program if connection to server fails
     systemShutdown()
 
+#----------------Previous time-function----------------#
+
 #Calling the function Main after time: 5 seconds
-updateTimer.enter(5, 1, main, (updateTimer,))
-updateTimer.run()
+#updateTimer.enter(5, 1, main, (updateTimer,))
+#updateTimer.run()
+
+#------------------------------------------------------#
