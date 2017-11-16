@@ -55,6 +55,7 @@ def main():
         amount_received = 0
         amount_expected = 9
 
+        #Splitting characters from received data so only numbers remain
         dChar = []
         while amount_received < amount_expected:
             data = sock.recv(1)
