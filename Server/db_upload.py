@@ -1,7 +1,7 @@
 import pymysql
 
 # Open database connection
-db = pymysql.connect("***REMOVED***","***REMOVED***","***REMOVED***","***REMOVED***")
+db = pymysql.connect("193.93.253.25","codespo","45Pvilfd","codespo_metinstitutt")
 
 # prepare a cursor object using cursor() method
 cursor = db.cursor()

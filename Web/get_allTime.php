@@ -1,5 +1,5 @@
 <?php
-$db = mysqli_connect("***REMOVED***","***REMOVED***","***REMOVED***","***REMOVED***") or die('Feil ved oppkobling til server. ERROR: 109');
+$db = mysqli_connect("193.93.253.25","codespo","45Pvilfd","codespo_metinstitutt") or die('Feil ved oppkobling til server. ERROR: 109');
 
 $datepick = $_POST['date'];
         $ascdesc = $_POST['ascdesc'];

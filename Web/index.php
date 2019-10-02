@@ -1,5 +1,5 @@
 <?php
-				$db = mysqli_connect("***REMOVED***","***REMOVED***","***REMOVED***","***REMOVED***") or die('FEILMELDING: Klarte ikke å koble til databasen');
+				$db = mysqli_connect("193.93.253.25","codespo","45Pvilfd","codespo_metinstitutt") or die('FEILMELDING: Klarte ikke å koble til databasen');
 
         $query = "SELECT * FROM data_main_min ORDER BY ID DESC LIMIT 1";
         mysqli_query($db, $query) or die('FEILMELDING: Feil i inntasting');
@@ -13,7 +13,7 @@
         }
         mysqli_close($db);
 
-				$db2 = mysqli_connect("***REMOVED***","***REMOVED***","***REMOVED***","***REMOVED***") or die('FEILMELDING: Klarte ikke å koble til databasen');
+				$db2 = mysqli_connect("193.93.253.25","codespo","45Pvilfd","codespo_metinstitutt") or die('FEILMELDING: Klarte ikke å koble til databasen');
 
 				$query2 = "SELECT * FROM data_main_min ORDER BY ID DESC";
         mysqli_query($db2, $query2) or die('FEILMELDING: Feil i inntasting');

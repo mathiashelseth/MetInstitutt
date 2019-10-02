@@ -20,7 +20,7 @@ b = -5.775 * (10**(-7))
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 # Connect the socket to the port where the server is listening
-ip = "***REMOVED***"
+ip = "37.26.220.85"
 port = 4002
 
 # Function for shutting down system if ConnectionError

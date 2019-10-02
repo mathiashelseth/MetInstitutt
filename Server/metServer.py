@@ -21,11 +21,11 @@ b = -5.775 * (10**(-7))
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 # Connect the socket to the port where the server is listening
-ip = "***REMOVED***"
+ip = "37.26.220.85"
 port = 4002
 
 # Connect to the database
-db = pymysql.connect("***REMOVED***","***REMOVED***","***REMOVED***","***REMOVED***")
+db = pymysql.connect("193.93.253.25","codespo","45Pvilfd","codespo_metinstitutt")
 
 # Prepare a cursor object using cursor() method for the database
 cursor = db.cursor()
